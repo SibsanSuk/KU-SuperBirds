@@ -14,6 +14,10 @@ public class GamePlayManager : MonoBehaviour
     public int score = 0;
     public int best = 0;
     public bool gameOver = false;
+    public AudioSource audioScore;
+    public AudioSource audioBest;
+    public AudioSource audioOver;
+    public AudioSource audioBG;
 
     void Start()
     {
@@ -22,6 +26,7 @@ public class GamePlayManager : MonoBehaviour
         {
             best = PlayerPrefs.GetInt("BEST");
         }
+        
     }
     void Update()
     {
@@ -41,6 +46,8 @@ public class GamePlayManager : MonoBehaviour
         gameOver = true;
         canvasGameOver.SetActive(true);
         textBestScore.text = PlayerPrefs.GetInt("BEST").ToString();
+        audioBG.Stop();
+        audioOver.Play();
     }
 
     public void AddScore()
@@ -50,9 +57,11 @@ public class GamePlayManager : MonoBehaviour
 
         score++;
         textScore.text = score.ToString();
+        audioScore.Play();
 
-        if(score > best)
+        if (score > best)
         {
+            audioBest.Play();
             PlayerPrefs.SetInt("BEST", score);
             PlayerPrefs.Save();
         }

@@ -9,6 +9,7 @@ public class SuperBird : MonoBehaviour
     public float forwardSpeed = 2f;
     GamePlayManager gm;
     public float maxSpeed = 3f;
+    public AudioSource audioFly;
 
 
     void Awake()
@@ -21,6 +22,7 @@ public class SuperBird : MonoBehaviour
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            audioFly.Play();
         }
         
     }
